@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MoscS_InfoTest
 {
-    public abstract class MoscS_Candidato
+    public abstract class MoscS_Candidato: IEquatable<MoscS_Candidato>, IComparable<MoscS_Candidato>
     {
         private int _MoscS_matricola;
         private string _MoscS_nome;
@@ -66,5 +66,45 @@ namespace MoscS_InfoTest
 
 
         public abstract int punteggio();
+
+
+        public override string ToString()
+        {
+            return $"{MoscS_matricola};{MoscS_nome}";
+        }
+
+
+        public bool Equals(MoscS_Candidato other)
+        {
+            if (other == null) 
+                return false;
+
+            if (this == other)
+                return true;
+
+            if (this.MoscS_matricola != other.MoscS_matricola)
+                return false;
+            if (this.MoscS_nome != other.MoscS_nome)
+                return false;
+
+            return true;
+        }
+
+
+        public int CompareTo(MoscS_Candidato other)
+        {
+            if (other == null)
+                return 1;
+
+            if (this.punteggio() == other.punteggio())
+                return 0;
+            else if (this.punteggio() < other.punteggio())
+                return -1;
+            else
+                return 1;
+        }
+
+
+        public override int GetHashCode() => (this.MoscS_matricola, this.MoscS_nome).GetHashCode();
     }
 }

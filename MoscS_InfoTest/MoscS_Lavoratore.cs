@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MoscS_InfoTest
 {
-    public abstract class MoscS_Lavoratore: MoscS_Candidato
+    public abstract class MoscS_Lavoratore: MoscS_Candidato, IEquatable<MoscS_Lavoratore>, IComparable<MoscS_Lavoratore>
     {
         private int _MoscS_esperienze;
 
@@ -49,6 +49,46 @@ namespace MoscS_InfoTest
         public override bool isIdoneo()
         {
             return (punteggio() >= 60);
+        }
+
+
+        public override string ToString()
+        {
+            return base.ToString() + $";{MoscS_esperienze}";
+        }
+
+
+        public bool Equals(MoscS_Lavoratore other)
+        {
+            if (other == null)
+                return false;
+
+            if (this == other)
+                return true;
+
+            if (!base.Equals(other))
+                return false;
+            else
+            {
+                if (this.MoscS_esperienze != other.MoscS_esperienze)
+                    return false;
+            }
+
+            return true;
+        }
+
+
+        public int CompareTo(MoscS_Lavoratore other)
+        {
+            if (other == null)
+                return 1;
+
+            if (this.punteggio() == other.punteggio())
+                return 0;
+            else if (this.punteggio() < other.punteggio())
+                return -1;
+            else
+                return 1;
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MoscS_InfoTest
 {
-    public abstract class MoscS_Disoccupato : MoscS_Candidato
+    public abstract class MoscS_Disoccupato : MoscS_Candidato, IEquatable<MoscS_Disoccupato>, IComparable<MoscS_Disoccupato>
     {
         private int _MoscS_voto;
         private bool _MoscS_lode;
@@ -72,6 +72,48 @@ namespace MoscS_InfoTest
                 return true;
             else
                 return false;
+        }
+
+
+        public override string ToString()
+        {
+            return base.ToString()+$";{MoscS_voto};{MoscS_lode}";
+        }
+
+
+        public bool Equals(MoscS_Disoccupato other)
+        {
+            if (other == null)
+                return false;
+
+            if (this == other)
+                return true;
+
+            if (!base.Equals(other))
+                return false;
+            else
+            {
+                if (this.MoscS_voto != other.MoscS_voto)
+                    return false;
+                if (this.MoscS_lode != other.MoscS_lode)
+                    return false;
+            }
+
+            return true;
+        }
+
+
+        public int CompareTo(MoscS_Disoccupato other)
+        {
+            if (other == null)
+                return 1;
+
+            if (this.punteggio() == other.punteggio())
+                return 0;
+            else if (this.punteggio() < other.punteggio())
+                return -1;
+            else
+                return 1;
         }
     }
 }
