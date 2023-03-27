@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MoscS_InfoTest
 {
-    abstract class MoscS_Candidato
+    public abstract class MoscS_Candidato
     {
         private int _MoscS_matricola;
         private string _MoscS_nome;
